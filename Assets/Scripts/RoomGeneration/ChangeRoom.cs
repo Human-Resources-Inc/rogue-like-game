@@ -12,10 +12,12 @@ public class ChangeRoom : MonoBehaviour
     }
 
     //ѕеремещает игрока и камеру на заданные величины
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        other.transform.position += playerChangePos;
-        cam.transform.position += cameraChangePos;
+    private void OnTriggerEnter2D(Collider2D other)
+    { 
+        if (other.CompareTag("Player")) {
+            other.transform.position += playerChangePos;
+            cam.transform.position += cameraChangePos;
+            }
 
     }
 

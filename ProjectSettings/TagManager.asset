@@ -8,6 +8,8 @@ TagManager:
   - RoomPoint
   - Rooms
   - RoomTypes
+  - Floor
+  - Block
   layers:
   - Default
   - TransparentFX

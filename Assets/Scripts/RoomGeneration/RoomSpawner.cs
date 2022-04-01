@@ -12,23 +12,20 @@ public class RoomSpawner : MonoBehaviour
         Bottom,
         Left,
         Right,
-
+        None
     }
 
     private RoomVariants variants;
-    private int rand = 0;
+    private int rand = 1;
     public bool spawned;
-    private float waitTime = 3f;
+    private float waitTime = 0.1f;
     private int roomsCount;
 
     public void Start()
     {
         variants = GameObject.FindGameObjectWithTag("RoomTypes").GetComponent<RoomVariants>();
         roomsCount = GameObject.FindGameObjectsWithTag("Rooms").Length;
-        if (roomsCount < 10)
-        {
-            Invoke("Spawn", 0.2f);
-        }
+        Invoke("Spawn", waitTime);
     }
 
     public void Spawn()
@@ -36,7 +33,26 @@ public class RoomSpawner : MonoBehaviour
 
         if (!spawned)
         {
-            Instantiate(variants.rooms[0], transform.position, variants.rooms[0].transform.rotation);
+            if (direction == Direction.Top)
+            {
+                rand = Random.Range(0, variants.topRooms.Length);
+                Instantiate(variants.topRooms[rand], transform.position, variants.topRooms[rand].transform.rotation);
+            }
+            else if (direction == Direction.Right)
+            {
+                rand = Random.Range(0, variants.rightRooms.Length);
+                Instantiate(variants.rightRooms[rand], transform.position, variants.rightRooms[rand].transform.rotation);
+            }
+            else if (direction == Direction.Bottom)
+            {
+                rand = Random.Range(0, variants.bottomRooms.Length);
+                Instantiate(variants.bottomRooms[rand], transform.position, variants.bottomRooms[rand].transform.rotation);
+            }
+            else if (direction == Direction.Left)
+            {
+                rand = Random.Range(0, variants.leftRooms.Length);
+                Instantiate(variants.leftRooms[rand], transform.position, variants.leftRooms[rand].transform.rotation);
+            }
         }
         spawned = true;
     }
@@ -62,10 +78,21 @@ public class RoomSpawner : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("RoomPoint") && gameObject.activeSelf)
+        if (other.CompareTag("RoomPoint"))
         {
-            other.gameObject.SetActive(false);
-            Destroy(other);
+            if (gameObject.GetComponent<RoomSpawner>().spawned)
+            {
+                Destroy(other);
+            }
+            else if (other.GetComponent<RoomSpawner>().spawned)
+            {
+                Destroy(gameObject);
+            }
+            else if (gameObject.activeSelf)
+            {
+                other.gameObject.SetActive(false);
+                Destroy(other);
+            }
         }
     }
 }
