@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class SelectRandom : MonoBehaviour
 {
-    public int LowCountToLeave = 1;
-    public int HighCountToLeave = 2;
-    [Range(0, 1)]
-    private int CountToLeave;
+    public int CountToLeave = 1;
     void Start()
     {
-        CountToLeave = HighCountToLeave - LowCountToLeave;
-        if (Random.value > 0.5f) CountToLeave += 1;
         while (transform.childCount > CountToLeave)
         {
             Transform childToDestroy = transform.GetChild(Random.Range(0, transform.childCount));

@@ -7,6 +7,12 @@ public class WallBreak : MonoBehaviour
     Vector3 v1, v2;
     public GameObject block;
     public bool isTurned = false;
+    private RoomEvents roomEvents;
+    
+    void Start()
+    {
+        roomEvents = GetComponentInParent<RoomEvents>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,6 +31,7 @@ public class WallBreak : MonoBehaviour
             }
             Instantiate(block, gameObject.transform.position + v1, Quaternion.identity);
             Instantiate(block, gameObject.transform.position + v2, Quaternion.identity);
+            roomEvents.doors.Remove(gameObject);
             Destroy(gameObject);
         }
 

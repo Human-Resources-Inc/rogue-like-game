@@ -2588,6 +2588,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5956074966479925366}
+  - component: {fileID: 6485181361472616380}
+  - component: {fileID: -2129779268519136277}
   m_Layer: 0
   m_Name: TopLeftRoom
   m_TagString: Rooms
@@ -2620,6 +2622,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6485181361472616380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417718023009395196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e238ee1eec11a864fbe840e50e876d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doors:
+  - {fileID: 8660464761412977310}
+  - {fileID: 2824183520019511491}
+  enemies:
+  - {fileID: 2147901164111324422}
+  - {fileID: 4040498396180193562}
+  - {fileID: 3114034953770327191}
+  powerups: []
+--- !u!61 &-2129779268519136277
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417718023009395196}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 22, y: 22}
+  m_EdgeRadius: 0
 --- !u!1 &2541447210370343050
 GameObject:
   m_ObjectHideFlags: 0
@@ -8913,13 +8961,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7206045989735132305}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abf1d4619f217da408432030af825063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LowCountToLeave: 1
-  HighCountToLeave: 2
+  CountToLeave: 1
 --- !u!1 &7220904701688045450
 GameObject:
   m_ObjectHideFlags: 0
@@ -11088,6 +11135,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7966232697410262916, guid: c67faaff7888ab9428df6dce4af7fd09, type: 3}
   m_PrefabInstance: {fileID: 5024601171186993951}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3114034953770327191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7966232697410262920, guid: c67faaff7888ab9428df6dce4af7fd09, type: 3}
+  m_PrefabInstance: {fileID: 5024601171186993951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6241713708165674642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11145,6 +11197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c67faaff7888ab9428df6dce4af7fd09, type: 3}
+--- !u!1 &4040498396180193562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7966232697410262920, guid: c67faaff7888ab9428df6dce4af7fd09, type: 3}
+  m_PrefabInstance: {fileID: 6241713708165674642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4040498396180193558 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7966232697410262916, guid: c67faaff7888ab9428df6dce4af7fd09, type: 3}
@@ -11210,5 +11267,10 @@ PrefabInstance:
 --- !u!4 &2147901164111324426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7966232697410262916, guid: c67faaff7888ab9428df6dce4af7fd09, type: 3}
+  m_PrefabInstance: {fileID: 8305586406265025166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2147901164111324422 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7966232697410262920, guid: c67faaff7888ab9428df6dce4af7fd09, type: 3}
   m_PrefabInstance: {fileID: 8305586406265025166}
   m_PrefabAsset: {fileID: 0}
