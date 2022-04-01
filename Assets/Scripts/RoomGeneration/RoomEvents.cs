@@ -22,9 +22,26 @@ public class RoomEvents : MonoBehaviour
         {
             foreach (GameObject door in doors)
             {
-
                 door.SetActive(false);
-
+            }
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.SetActive(false);
+            }
+            int CountToLeave = Random.Range(0, 3);
+            foreach (GameObject enemy in enemies)
+            {
+                if (enemies.IndexOf(enemy) <= CountToLeave)
+                {
+                    if (enemy != null)
+                        enemy.SetActive(false);
+                    else enemies.Remove(enemy);
+                }
+                else
+                {
+                    enemies.Remove(enemy);
+                    Destroy(enemy.gameObject);
+                }
             }
             spawned = true;
         }
@@ -65,6 +82,16 @@ public class RoomEvents : MonoBehaviour
         {
             if (door != null) 
                 door.SetActive(true);
+        }
+
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy != null)
+                 enemy.SetActive(true);
+            else {
+                enemies.Remove(enemy);
+                Destroy(enemy.gameObject);
+            }
         }
     }
 }

@@ -9308,7 +9308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf1d4619f217da408432030af825063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountToLeave: 1
+  CountToLeave: 3
 --- !u!1 &7811331815730160253
 GameObject:
   m_ObjectHideFlags: 0

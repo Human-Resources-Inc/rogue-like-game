@@ -6051,8 +6051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43503da9201951b4998d806c1c522593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraChangePos: {x: 0, y: 22, z: 0}
-  playerChangePos: {x: 0, y: 4, z: 0}
+  cameraChangePos: {x: 0, y: -22, z: 0}
+  playerChangePos: {x: 0, y: -4, z: 0}
 --- !u!1 &5313420014580160943
 GameObject:
   m_ObjectHideFlags: 0
