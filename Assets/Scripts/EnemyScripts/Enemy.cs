@@ -32,12 +32,14 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField]
     private EnemyAttack enemyAttack;
 
+    private RoomEvents roomEvents;
 
     void Start()
     {
         currentHealth = maxHealth;
         startingPosition = rigidbody2D.position;
         target = FindObjectOfType<Player>().transform;
+        roomEvents = GetComponentInParent<RoomEvents>();
     }
 
     private void OnPathComplete(Path p)
@@ -129,6 +131,7 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            roomEvents.enemies.Remove(gameObject);
             Destroy(gameObject);
             seeker.pathCallback -= OnPathComplete;
             return;
