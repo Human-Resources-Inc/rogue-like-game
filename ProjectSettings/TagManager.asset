@@ -10,6 +10,7 @@ TagManager:
   - RoomTypes
   - Floor
   - Block
+  - Enemy
   layers:
   - Default
   - TransparentFX

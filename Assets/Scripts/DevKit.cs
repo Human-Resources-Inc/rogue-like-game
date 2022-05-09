@@ -11,5 +11,7 @@ public class DevKit : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
             Instantiate(mobPrefabs[0]);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            Instantiate(mobPrefabs[1]);
     }
 }
