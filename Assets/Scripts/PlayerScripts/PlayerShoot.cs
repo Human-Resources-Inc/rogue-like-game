@@ -28,7 +28,6 @@ public class PlayerShoot : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
-        Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
         Rigidbody2D rigidbody2D = projectile.GetComponent<Rigidbody2D>();
         Projectile component = projectile.GetComponent<Projectile>();
 

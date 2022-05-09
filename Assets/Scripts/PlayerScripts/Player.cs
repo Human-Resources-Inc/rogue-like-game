@@ -18,8 +18,6 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     [SerializeField]
-    private Animator animator;
-    [SerializeField]
     private Texture2D playerCursor;
     [SerializeField]
     private Rigidbody2D firePoint;
@@ -37,28 +35,18 @@ public class Player : MonoBehaviour, IDamageable
         playerPosition.x = Input.GetAxisRaw("Horizontal");
         playerPosition.y = Input.GetAxisRaw("Vertical");
 
-        // Необходима для смены анимации с idle на walking
-        bool magnitude = playerPosition.sqrMagnitude > 0 || playerPosition.magnitude < 0 ? true : false;
-        animator.SetBool("isMoving", magnitude);
-
         mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void FixedUpdate()
     {
-        // Поворачиваем игрока в зависимости в какую сторону он направляется
-        if (playerPosition.x < 0)
-            spriteRenderer.flipX = true;
-        else
-            spriteRenderer.flipX = false;
-
         // Обновляем позицию игрока
         rigidbody2D.MovePosition(rigidbody2D.position + playerPosition * movementSpeed * Time.fixedDeltaTime);
 
         Vector2 lookDirection = mousePosition - rigidbody2D.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
         firePoint.rotation = angle;
-        firePoint.transform.position = rigidbody2D.transform.position + new Vector3(0, .8f, 0);
+        firePoint.transform.position = rigidbody2D.transform.position;
     }
 
     public void Damage(int damage)

@@ -27,16 +27,20 @@ public class Projectile : MonoBehaviour
         return damage;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject entity = collision.gameObject;
         IDamageable entityInterface = entity.GetComponent<IDamageable>();
-        if (entity != owner && entity.GetComponent<Projectile>() == null)
+        if (entity != owner &&
+            entity.GetComponent<Projectile>() == null &&
+            !entity.CompareTag("Rooms") &&
+            !entity.CompareTag("RoomPoint"))
         {
             if (entityInterface != null)
             {
                 entityInterface.Damage(GetTrueDamage());
             }
+            Debug.Log(entity.name);
             Destroy(gameObject);
         }
     }

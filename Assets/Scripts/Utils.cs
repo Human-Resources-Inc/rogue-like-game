@@ -11,7 +11,7 @@ namespace Utils
         /// </summary>
         public static Vector3 GetRandomDirection()
         {
-            return new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+            return new Vector3(Random.Range(-500f, 500f), Random.Range(-500f, 500f)).normalized;
         }
 
         /// <summary>
@@ -26,7 +26,10 @@ namespace Utils
             foreach (Collider2D collider in colliders)
             {
                 if (collider.TryGetComponent<Player>(out Player player))
+                {
                     return true;
+                }
+                    
             }
             return false;
         }
@@ -39,12 +42,15 @@ namespace Utils
         /// <returns>false - игрок находится за чем-нибудь что мешает мобу видеть игрока</returns>
         public static bool CanSeePlayer(Vector2 enemyPosition, Vector2 playerPosition)
         {
-            RaycastHit2D hit = Physics2D.Linecast(enemyPosition, playerPosition);
+            RaycastHit2D[] hits = Physics2D.LinecastAll(enemyPosition, playerPosition);
             Debug.DrawLine(enemyPosition, playerPosition);
-            if (hit.collider != null)
+            foreach (var hit in hits)
             {
-                if (hit.collider.TryGetComponent<Player>(out Player player))
-                    return true;
+                if (hit.collider != null)
+                {
+                    if (hit.collider.TryGetComponent<Player>(out Player player))
+                        return true;
+                }
             }
             return false;
         }
