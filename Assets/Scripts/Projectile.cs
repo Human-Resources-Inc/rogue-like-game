@@ -34,6 +34,9 @@ public class Projectile : MonoBehaviour
         if (entity != owner &&
             entity.GetComponent<Projectile>() == null &&
             !entity.CompareTag("Rooms") &&
+            !entity.CompareTag("Floor") &&
+            !entity.CompareTag("Pickups") &&
+            !entity.CompareTag("Corpse") &&
             !entity.CompareTag("RoomPoint"))
         {
             if (entityInterface != null)

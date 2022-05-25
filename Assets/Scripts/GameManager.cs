@@ -28,14 +28,32 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        
     }
 
     public void StartGame()
     {
         SceneManager.LoadScene("GameProcess");
+        Awake();
         StartCoroutine(RecalculateEnemies());
         gameActive = true;
+    }
+
+    public void LoseGame()
+    {
+        SceneManager.LoadScene("GameoOver");
+        gameActive = false;
+    }
+
+    public void WinGame()
+    {
+        SceneManager.LoadScene("Victory");
+        gameActive = false;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     public IEnumerator RecalculateEnemies()

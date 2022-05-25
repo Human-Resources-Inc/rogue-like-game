@@ -28,22 +28,6 @@ public class RoomEvents : MonoBehaviour
             {
                 enemy.SetActive(false);
             }
-            int CountToLeave = Random.Range(0, 3);
-            foreach (GameObject enemy in enemies)
-            {
-                if (enemies.IndexOf(enemy) <= CountToLeave)
-                {
-                    if (enemy != null)
-                        enemy.SetActive(false);
-                    else enemies.Remove(enemy);
-                }
-                else
-                {
-                    enemies.Remove(enemy);
-                    Destroy(enemy.gameObject);
-                }
-            }
-            spawned = true;
         }
     }
     void OnTriggerEnter2D(Collider2D other) {

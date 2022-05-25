@@ -11,6 +11,8 @@ TagManager:
   - Floor
   - Block
   - Enemy
+  - Pickups
+  - Corpse
   layers:
   - Default
   - TransparentFX

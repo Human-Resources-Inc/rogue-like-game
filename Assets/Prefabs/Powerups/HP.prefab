@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 391377477489827403}
   m_Layer: 0
   m_Name: HP
-  m_TagString: Untagged
+  m_TagString: Pickups
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

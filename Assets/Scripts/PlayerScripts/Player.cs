@@ -53,6 +53,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("GameOver");
     }
 }

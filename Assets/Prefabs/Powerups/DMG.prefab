@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3135094910894068082}
   m_Layer: 0
   m_Name: DMG
-  m_TagString: Untagged
+  m_TagString: Pickups
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
