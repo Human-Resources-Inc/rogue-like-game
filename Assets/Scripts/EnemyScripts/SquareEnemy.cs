@@ -4,34 +4,35 @@ using UnityEngine;
 using Utils;
 using System.Threading.Tasks;
 
-public class SquareEnemy : EnemyBase, IDamageable
+public class SquareEnemy : EnemyBase
 {
-    public void Damage(int damage)
+    public override IEnumerator MeleeAttack()
     {
-        currentHealth -= damage;
-
-        if (!isChasing && !enemyMovement.IsInvoking("ChasePlayer"))
-        {
-            isChasing = true;
-            enemyMovement.CancelInvoke("Roam");
-            enemyMovement.InvokeRepeating("ChasePlayer", 0, .5f);
-        }
-
-        if (currentHealth <= 0) Destroy(gameObject);
+        throw new System.NotImplementedException();
     }
 
-    public override void SpecialAttack()
+    public override IEnumerator RangedAttack()
     {
-        // НЕ РАБОТАЕТ!
+        throw new System.NotImplementedException();
+    }
+
+    public override IEnumerator SpecialAttack()
+    {
         enemyMovement.CancelInvoke("ChasePlayer");
+
         Vector3 lastPlayerPosition = target.position;
-        animator.SetBool("Charging", true);
-        animator.SetBool("Charging", false);
-        transform.position = lastPlayerPosition;
-        animator.SetBool("Used", true);
-        animator.SetBool("Used", false);
+        animator.SetTrigger("Charging");
+        enemyMovement.rb.mass = 100;
+
+        yield return new WaitForSeconds(specialChargeTime);
+        enemyMovement.rb.mass = 1;
+        animator.SetTrigger("SpecialUsed");
+        transform.position = lastPlayerPosition - new Vector3(0.5f, 0.5f);
+
         enemyMovement.InvokeRepeating("ChasePlayer", 0, .5f);
-        //TODO: (для mili) сделать отчет кулдауна
+
+        yield return new WaitForSeconds(specialCooldown);
+        specialOnCooldown = false;
     }
 
     // Start is called before the first frame update
@@ -45,35 +46,6 @@ public class SquareEnemy : EnemyBase, IDamageable
     // Update is called once per frame
     void Update()
     {
-        #region Логика атаки противника
-        if (isChasing)
-        {
-            if (UtilsClass.CanSeePlayer(transform.position, target.position))
-            {
-                switch (hasSpecial && !specialOnCooldown)
-                {
-                    // Используем специальную атаку, если такая существует
-                    // и она не на перезарядке
-                    case true:
-                        if (UtilsClass.DetectPlayerInRange(transform.position, specialRange))
-                        {
-                            Debug.Log("Using Special!");
-                            specialOnCooldown = true;
-                            SpecialAttack();
-                        }
-                        break;
-                    // Иначе, используем обычные атаки.
-                    // Этот код выполняется при случае что хотя бы один из атрибутов(meleeRange || fireRange)
-                    // имеют значения
-                    case false:
-                        if (UtilsClass.DetectPlayerInRange(transform.position, meleeRange))
-                        {
-                            MeleeAttack();
-                        }
-                        break;
-                }
-            }
-        }
-        #endregion
+        SpecialBrain(MeleeAttackStandard(), SpecialAttack(), true);
     }
 }

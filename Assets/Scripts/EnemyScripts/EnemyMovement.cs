@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private Transform target;
     [SerializeField] private EnemyBase enemy;
+    [SerializeField] private Rigidbody2D firePoint;
     public Path path;
     private float nextWaypointDistance = 1f;
     private int currentWaypoint;
@@ -21,7 +22,8 @@ public class EnemyMovement : MonoBehaviour
     public void Roam()
     {
         Debug.Log("Roaming...");
-        var direction = UtilsClass.GetRandomDirection();
+        
+        var direction = UtilsClass.GetRandomDirection() * 5;
         seeker.StartPath(rb.position, direction, OnPathComplete);
     }
 
@@ -50,7 +52,8 @@ public class EnemyMovement : MonoBehaviour
         target = FindObjectOfType<Player>().transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        InvokeRepeating("Roam", 0, 20);
+        
+        InvokeRepeating("Roam", 0, Random.Range(10, 20));
     }
 
 
@@ -68,7 +71,9 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (path == null)
+        UtilsClass.GetFireAngle(target.position, rb, firePoint);
+
+        if (path == null || enemy.inAttackRange)
             return;
 
         if (currentWaypoint >= path.vectorPath.Count)
@@ -84,6 +89,7 @@ public class EnemyMovement : MonoBehaviour
         Vector2 force = dir * movementSpeed * Time.deltaTime;
 
         rb.AddForce(force);
+        
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (distance < nextWaypointDistance)

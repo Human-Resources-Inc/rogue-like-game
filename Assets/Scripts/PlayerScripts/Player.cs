@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utils;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour, IDamageable
         // Устанавливаем здоровье игрока и курсор
         currentHealth = maxHealth;
         Cursor.SetCursor(playerCursor, new Vector2(10, 10), CursorMode.Auto);
+
+        cam = Camera.main;
     }
 
     private void Update()
@@ -43,16 +46,13 @@ public class Player : MonoBehaviour, IDamageable
         // Обновляем позицию игрока
         rigidbody2D.MovePosition(rigidbody2D.position + playerPosition * movementSpeed * Time.fixedDeltaTime);
 
-        Vector2 lookDirection = mousePosition - rigidbody2D.position;
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        firePoint.rotation = angle;
-        firePoint.transform.position = rigidbody2D.transform.position;
+        UtilsClass.GetFireAngle(mousePosition, rigidbody2D, firePoint);
     }
 
     public void Damage(int damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Menu");
     }
 }

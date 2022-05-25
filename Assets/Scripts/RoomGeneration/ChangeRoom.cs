@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
+
+
 public class ChangeRoom : MonoBehaviour
 {
-    public Vector3 cameraChangePos;
-    public Vector3 playerChangePos;
-    private Camera cam;
+    [SerializeField] private Vector3 cameraChangePos;
+    [SerializeField] private Vector3 playerChangePos;
+    [SerializeField] private GameObject cameraBounds;
+    [SerializeField] private AstarPath navmesh;
+
+
     void Start()
     {
-        cam = Camera.main.GetComponent<Camera>();
+        cameraBounds = FindObjectOfType<PolygonCollider2D>().gameObject;
+        navmesh = FindObjectOfType<AstarPath>();
     }
 
     //ѕеремещает игрока и камеру на заданные величины
@@ -16,7 +23,11 @@ public class ChangeRoom : MonoBehaviour
     { 
         if (other.CompareTag("Player")) {
             other.transform.position += playerChangePos;
-            cam.transform.position += cameraChangePos;
+            cameraBounds.transform.position += cameraChangePos;
+
+            var grid = AstarPath.active.data.gridGraph;
+            grid.center += cameraChangePos;
+            navmesh.Scan();
             }
 
     }

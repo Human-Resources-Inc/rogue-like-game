@@ -55,7 +55,30 @@ namespace Utils
             return false;
         }
 
-        
+        /// <summary>
+        /// Ставит код на ожидание в секундах
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <returns></returns>
+        public static IEnumerator WaitFor(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+        }
+
+        /// <summary>
+        /// Возвращает угол прицеливания.
+        /// </summary>
+        /// <param name="target">Цель</param>
+        /// <param name="entity">Существо, которое производит выстрел</param>
+        /// <param name="firePoint">Точка откуда производится выстрел</param>
+        public static void GetFireAngle(Vector2 target, Rigidbody2D entity, Rigidbody2D firePoint)
+        {
+            Vector2 lookDirection = target - entity.position;
+            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
+            firePoint.rotation = angle;
+            firePoint.transform.position = entity.transform.position;
+        }
+
     }
 }
 
