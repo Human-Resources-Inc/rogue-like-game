@@ -7,8 +7,6 @@ public class PlayerShoot : MonoBehaviour
 {
     public float force = 20f;
 
-    private int baseDamage = 20;
-
     [SerializeField]
     private Player player;
     [SerializeField]
@@ -32,7 +30,7 @@ public class PlayerShoot : MonoBehaviour
         Projectile component = projectile.GetComponent<Projectile>();
 
         component.owner = player.gameObject;
-        component.baseDamage = baseDamage;
+        component.baseDamage = player.baseDamage;
         component.powerUps = player.activePowerUps;
         component.selfDamage = false;
 

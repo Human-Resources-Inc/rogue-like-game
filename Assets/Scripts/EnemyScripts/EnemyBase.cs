@@ -174,15 +174,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public IEnumerator Die()
     {
-        Debug.Log($"BODY {GameManager.instance.enemiesKilled}");
+        Debug.Log($"BODYCOUNT {GameManager.instance.enemiesKilled}");
         transform.gameObject.tag = "Corpse";
         GameManager.instance.enemiesKilled++;
         if (GameManager.instance.enemiesKilled > 15 )
         {
             GameManager.instance.WinGame();
         }
-        animator.SetTrigger("Died");
         enemyMovement.enabled = false;
+        animator.SetTrigger("Died");
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }

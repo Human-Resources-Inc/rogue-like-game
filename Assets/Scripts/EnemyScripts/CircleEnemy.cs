@@ -29,6 +29,6 @@ public class CircleEnemy : EnemyBase
 
     private void Update()
     {
-        NoSpecialBrain(RangedAttackStandard());
+        if (currentHealth>0) NoSpecialBrain(RangedAttackStandard());
     }
 }

@@ -19,6 +19,9 @@ public class PowerUps : MonoBehaviour
             player.activePowerUps.Add(gameObject.GetComponent<PowerUps>());
             player.movementSpeed += speedModifier;
             player.maxHealth += healthModifier;
+            player.currentHealth += healthModifier;
+            player.baseDamage += damageModifier;
+            player.healthBar.UpdateHealth();
             spriteRenderer.sprite = null;
             collider.enabled = false;
         }

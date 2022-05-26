@@ -6,8 +6,10 @@ using Utils;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    public int baseDamage = 20;
     public int maxHealth = 100;
     public int currentHealth;
+    public HealthBar healthBar;
     public float movementSpeed = 5f;
     public Rigidbody2D rigidbody2D;
     public List<PowerUps> activePowerUps;
@@ -54,5 +56,6 @@ public class Player : MonoBehaviour, IDamageable
         currentHealth -= damage;
         if (currentHealth <= 0)
             SceneManager.LoadScene("GameOver");
+        healthBar.UpdateHealth();
     }
 }
